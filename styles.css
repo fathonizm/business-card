@@ -1,0 +1,329 @@
+:root {
+    --bg: #070b14;
+    --surface: #0e1626;
+    --surface-2: #16223a;
+
+    --text: #e6f0ff;
+    --text-dim: #7f95b3;
+
+    --accent: #35e0e8;
+    --line: rgba(120, 200, 255, 0.14);
+
+    /*spacing on a scale*/
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+
+    --radius: 14px;
+
+    --speed: 180ms;
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(700px 400px at 50% 10%, rgba(53, 224, 232, 0.10), transparent 70%),
+        radial-gradient(600px 400px at 85% 95%, rgba(124, 92, 255, 0.08), transparent 70%),
+        var(--bg);
+    /*
+    Challenge:
+    Find a web safe font you like, and add it 
+    to your card.
+    */
+
+    color: var(--text);
+    font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+.avatar {
+    display: block;
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.card {
+    position: relative;
+    width: min(420px, 92vw);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-4);
+
+    background: 
+        linear-gradient(rgba(120, 200, 255, 0.05) 1px, transparent 1px) 0 0 / 100% 22px,
+        linear-gradient(90deg, rgba(120, 200, 255, 0.05) 1px, transparent 1px) 0 0 / 22px 100%,
+        linear-gradient(160deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line);
+
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 2px 6px rgba(0, 0, 0, 0.5),
+        0 18px 40px -12px rgba(0, 0, 0, 0.8);
+
+    transition:
+        transform var(--speed) var(--ease),
+        box-shadow var(--speed) var(--ease),
+        border-color var(--speed) var(--ease);
+    
+    animation: rise-in 500ms var(--ease) backwards;
+    /*
+    Challenge:
+    Find a color palette you like on Coolors.co
+    and use it in your business card.
+     */
+}
+
+.card::before, .card::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--accent);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.card::before {
+    top: 9px;
+    left: 9px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.card::after {
+    bottom: 9px;
+    right: 9px;
+    border-left: none;
+    border-top: none;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(53, 224, 232, 0.45);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.09),
+        0 2px 6px rgba(0, 0, 0, 0.5),
+        0 28px 50px -14px rgba(0, 0, 0, 0.85),
+        0 0 40px -8px rgba(53, 224, 232, 0.3);
+}
+
+.card-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.card-info {
+    min-width: 0;
+}
+
+.card-id {
+    position: relative;
+    flex: none;
+}
+
+.label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.name {
+    margin: var(--space-1) 0 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+.location {
+    margin: var(--space-2) 0 0;
+    font-size: 13px;
+    color: var(--text-dim);
+}
+
+.status {
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    transform: translateX(-50%);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 3px 9px;
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #04121a;
+    background: var(--accent);
+}
+
+.status::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+.stats {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+}
+
+.stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+}
+
+.stat + .stat {
+    border-left: 1px solid var(--line);
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+.skills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.skill {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.skill-name{
+    flex: none;
+    width: 92px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+.bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(120, 200, 255, 0.1);
+    overflow: hidden;
+}
+
+.bar-fill {
+    display: block;
+    height: 100%;
+    width: var(--level);
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), #7c5cff);
+
+    transform-origin: left;
+    animation: fill-in 700ms var(--ease) backwards;
+}
+
+.skill:nth-child(2) .bar-fill {
+    animation-delay: 80ms;
+}
+
+.skill:nth-child(3) .bar-fill {
+    animation-delay: 160ms;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.35;
+    }
+}
+
+@keyframes fill-in {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/*
+Stretch goals:
+Find other ways you can personalize 
+the design of your business card, e.g.:
+- change the border(s)
+- add border radius
+- shuffle the layout
+- shadows        🤯
+- hover effects  🤯🤯
+- animations     🤯🤯🤯
+*/
+
+/*
+Final challenge:
+Download the code to your local computer and place it
+in a folder called "business-card"
+*/
